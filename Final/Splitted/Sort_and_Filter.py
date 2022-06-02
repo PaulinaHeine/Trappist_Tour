@@ -1,6 +1,3 @@
-
-import copy
-
 import numpy as np
 
 from Final.Splitted.ESA_code import combine_scores
@@ -66,3 +63,6 @@ def best_sol(t_delta, conts, bound=100):
         conts.pop(index)
         final_scores.pop(index)
     return t_delta, final_scores, conts, all_sol_final_scores
+
+
+

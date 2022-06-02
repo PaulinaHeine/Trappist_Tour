@@ -4,7 +4,7 @@ import numpy as np
 
 from Final.Splitted.Algorithms.NSGA2_ import run_NSGA2
 from Final.Splitted.Algorithms.R_NSGA2_ import run_RNSGA2
-from Final.Splitted.Permutations_Sequences import find_perms
+from Final.Splitted.Permutations_Sequences import find_perms, show_sequence
 from Final.Splitted.Sort_and_Filter import proof_dom, best_sol
 from Final.Splitted.ESA_code import combine_scores
 from Final.Splitted.Plottings import plot_all_points, plot_front
@@ -14,7 +14,7 @@ def optimize():
     print("Start the run")
     start = time.time()
     print("Select permutations")
-    perms = find_perms(10)
+    perms = find_perms(5)
 
     print("Start the algorithm")
     t_delta, conts = run_RNSGA2(perms, offspring = 100)
@@ -70,3 +70,6 @@ elif len(l) == 6:
     all_sol_t_delta = l[3]
     all_sol_conts = l[4]
     all_sol_final_scores = l[5]
+
+
+show_sequence(conts)

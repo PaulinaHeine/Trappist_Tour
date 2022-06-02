@@ -2,7 +2,6 @@ import random
 import itertools
 
 
-
 def permutations(iterable, r=None):
     # permutations('ABCD', 2) --> AB AC AD BA BC BD CA CB CD DA DB DC
     # permutations(range(3)) --> 012 021 102 120 201 210
@@ -31,8 +30,8 @@ def permutations(iterable, r=None):
 
 def find_perms(r):
     perms = (list(itertools.permutations([0, 1, 2, 3, 4, 5, 6])))
-    # perms = perms[0:100]
-    perms = random.sample(perms, r)
+    perms = perms[0:r]
+    #perms = random.sample(perms, r)
     return perms
 
 
@@ -42,3 +41,11 @@ def pairwise(iterable):
     next(b, None)
     return zip(a, b)
 
+
+def show_sequence(co):
+    # zeige alle sequenzen an
+    store = []
+    for x in range(len(co)):
+        store += [co[x][-7:]]
+
+    return store

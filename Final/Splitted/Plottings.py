@@ -19,7 +19,6 @@ def plot_all_points(all_sol_t_delta, t_delta):
     plt.xlabel("Delta_V")
     plt.ylabel("Days")
     plt.show()
-    # plt.savefig("all_sol.png")
 
 
 def plot_front(t_delta):
@@ -35,5 +34,4 @@ def plot_front(t_delta):
     plt.xlabel("Delta_V")
     plt.ylabel("Days")
     plt.show()
-    # plt.savefig("front.png")
 

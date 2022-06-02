@@ -63,7 +63,8 @@ def run_NSGA2(perms, offspring=200, pop_size=50, tol=0.002, n_last=8, n_max_gen=
             selection=get_selection('random'),
             crossover=get_crossover("real_sbx", prob=5, eta=15),
             mutation=get_mutation("real_pm", eta=100),
-            eliminate_duplicates=True
+            eliminate_duplicates=True,
+            seed=42
         )
 
         # termination = get_termination("n_gen", 20)
