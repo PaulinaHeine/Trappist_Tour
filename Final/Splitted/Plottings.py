@@ -21,6 +21,7 @@ def plot_all_points(all_sol_t_delta, t_delta):
     plt.show()
 
 
+
 def plot_front(t_delta):
     t_delta = np.array(t_delta)
     plt.figure(figsize=(7, 5))

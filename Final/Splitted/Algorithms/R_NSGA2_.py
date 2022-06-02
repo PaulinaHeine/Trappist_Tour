@@ -63,6 +63,7 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
             extreme_points_as_reference_points=False,
             seed=42)
 
+
         termination = MultiObjectiveSpaceToleranceTermination(tol=tol,
                                                               n_last=n_last,
                                                               n_max_gen=n_max_gen,

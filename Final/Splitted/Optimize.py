@@ -10,6 +10,7 @@ from Final.Splitted.ESA_code import combine_scores
 from Final.Splitted.Plottings import plot_all_points, plot_front
 
 
+
 def optimize():
     print("Start the run")
     start = time.time()

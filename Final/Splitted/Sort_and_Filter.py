@@ -31,7 +31,6 @@ def proof_dom(t_delta, conts):
 
     return conts, t_delta, all_sol_t_delta, all_sol_conts
 
-
 # alle vor dem ref punkt
 def sort_points(t_delta, conts):
     # alle punkte hinter dem refpunkt raus
