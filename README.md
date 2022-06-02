@@ -16,3 +16,5 @@ To Do:
 	- mal ne Lösung hochladen
 	- Permutation sampeling Finishen
 	- Permutationssequenzen aneinanderhängen, random? Per 	   system??? Wie???
+	- Plots am ende schön machen
+	
