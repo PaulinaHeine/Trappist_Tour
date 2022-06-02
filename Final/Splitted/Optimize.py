@@ -2,7 +2,8 @@ import time
 
 import numpy as np
 
-from Final.Splitted.Algorithms import run_RNSGA2
+from Final.Splitted.Algorithms.NSGA2_ import run_NSGA2
+from Final.Splitted.Algorithms.R_NSGA2_ import run_RNSGA2
 from Final.Splitted.Permutations_Sequences import find_perms
 from Final.Splitted.Sort_and_Filter import proof_dom, best_sol
 from Final.Splitted.ESA_code import combine_scores
@@ -13,7 +14,7 @@ def optimize():
     print("Start the run")
     start = time.time()
     print("Select permutations")
-    perms = find_perms(5)
+    perms = find_perms(10)
 
     print("Start the algorithm")
     t_delta, conts = run_RNSGA2(perms, offspring = 100)

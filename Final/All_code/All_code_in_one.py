@@ -17,6 +17,7 @@ import time
 from collections import Counter
 import random
 
+'''
 # Cavendish constant (m^3/s^2/kg)
 G = 6.67430E-11
 # Sun_mass (kg)
@@ -838,3 +839,4 @@ def find_best_perms(conts):
     Counter(best_perms_count)
     best_perms = list(set(best_perms_count))
     return best_perms, best_perms_count
+'''
