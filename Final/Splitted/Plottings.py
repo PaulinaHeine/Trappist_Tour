@@ -1,6 +1,8 @@
 import numpy as np
-from matplotlib import pyplot as plt
+import matplotlib.pyplot
 import numpy as np
+from matplotlib import pyplot as plt
+
 
 def plot_all_points(all_sol_t_delta, t_delta):
     all_sol_t_delta = np.array(all_sol_t_delta)

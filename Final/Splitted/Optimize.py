@@ -6,6 +6,7 @@ from Final.Splitted.Algorithms import run_RNSGA2
 from Final.Splitted.Permutations_Sequences import find_perms
 from Final.Splitted.Sort_and_Filter import proof_dom, best_sol
 from Final.Splitted.ESA_code import combine_scores
+from Final.Splitted.Plottings import plot_all_points, plot_front
 
 
 def optimize():
