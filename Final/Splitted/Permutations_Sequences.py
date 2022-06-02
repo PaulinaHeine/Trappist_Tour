@@ -31,8 +31,8 @@ def permutations(iterable, r=None):
 
 def find_perms(r):
     perms = (list(itertools.permutations([0, 1, 2, 3, 4, 5, 6])))
-    perms = perms[0:r]
-    #perms = random.sample(perms, r)
+    #perms = perms[0:r]
+    perms = random.sample(perms, r)
     return perms
 
 

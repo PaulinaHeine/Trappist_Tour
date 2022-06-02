@@ -15,7 +15,7 @@ def optimize():
     print("Start the run")
     start = time.time()
     print("Select permutations")
-    perms = find_perms(5)
+    perms = find_perms(2)
 
     print("Start the algorithm")
     t_delta, conts = run_RNSGA2(perms, offspring = 100)
@@ -72,5 +72,6 @@ elif len(l) == 6:
     all_sol_conts = l[4]
     all_sol_final_scores = l[5]
 
-
-show_sequence(conts)
+#plot_all_points(all_sol_t_delta, t_delta)
+#plot_front(t_delta)
+#show_sequence(conts)

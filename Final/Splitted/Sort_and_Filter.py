@@ -34,17 +34,19 @@ def proof_dom(t_delta, conts):
 # alle vor dem ref punkt
 def sort_points(t_delta, conts):
     # alle punkte hinter dem refpunkt raus
-    final_scores = []
+    final_scores_ref = []
+    t_delta_ref = t_delta.copy().tolist()
+    conts_ref = list(conts.copy())
     for t in range(len(t_delta)):
-        final_scores.append(combine_scores(np.array([t_delta[t]])))
+        final_scores_ref.append(combine_scores(np.array([t_delta[t]])))
 
     for v in reversed(list(range(len(t_delta)))):
-        if final_scores[v] >= 0.0:
-            t_delta.pop(v)
-            conts.pop(v)
-            final_scores.pop(v)
+        if final_scores_ref[v] >= 0.0:
+            t_delta_ref.pop(v)
+            conts_ref.pop(v)
+            final_scores_ref.pop(v)
 
-    return t_delta, conts, final_scores
+    return t_delta_ref, conts_ref, final_scores_ref
 
 
 # besten 100 nicht zusammen mit sort points machen
