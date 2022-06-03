@@ -4,22 +4,25 @@ import numpy as np
 
 from Final.Splitted.Algorithms.NSGA2_ import run_NSGA2
 from Final.Splitted.Algorithms.R_NSGA2_ import run_RNSGA2
+from Final.Splitted.Algorithms.NSGA_3_ import run_NSGA3
+from Final.Splitted.Algorithms.R_NSGA_3_ import run_RNSGA3
 from Final.Splitted.Permutations_Sequences import find_perms, show_sequence
 from Final.Splitted.Sort_and_Filter import proof_dom, best_sol
 from Final.Splitted.ESA_code import combine_scores
-from Final.Splitted.Plottings import plot_all_points, plot_front
-
+from matplotlib import pyplot as plt
+from Final.Splitted.Plottings import plot_all_points, plot_front, plot_all_points_behind
 
 
 def optimize():
     print("Start the run")
     start = time.time()
     print("Select permutations")
-    perms = find_perms(2)
+    perms = find_perms(10)
 
     print("Start the algorithm")
-    t_delta, conts = run_RNSGA2(perms, offspring = 100)
+    t_delta, conts = run_NSGA3(perms, offspring = 200)
     print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions found")
+    print(f"The score is {combine_scores(t_delta)}")
 
     stop = time.time()
     time_interval = stop - start
@@ -29,6 +32,7 @@ def optimize():
     print("Remove the dominated solutions")
     conts, t_delta, all_sol_t_delta, all_sol_conts = proof_dom(t_delta, conts)
     print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions left")
+    print(f"The score is {combine_scores(t_delta)}")
 
     if combine_scores(np.array(t_delta)) < 0.0:
         print("Score under 0.0 :)")
@@ -75,3 +79,5 @@ elif len(l) == 6:
 #plot_all_points(all_sol_t_delta, t_delta)
 #plot_front(t_delta)
 #show_sequence(conts)
+
+#plot_all_points_behind(all_sol_t_delta, t_delta, conts)

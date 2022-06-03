@@ -1,8 +1,6 @@
 
 import numpy as np
 from matplotlib import pyplot as plt
-import matplotlib.lines as mlines
-import matplotlib.transforms as mtransforms
 
 from Final.Splitted.Sort_and_Filter import sort_points
 
@@ -66,3 +64,4 @@ def plot_all_points_behind(all_sol_t_delta, t_delta, conts):
     plt.plot([2500, 2500], [0, 4000], color='r')
     plt.plot([-100000, 2500], [4000, 4000], color='r')
     plt.show()
+
