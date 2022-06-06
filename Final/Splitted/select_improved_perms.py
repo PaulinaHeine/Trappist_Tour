@@ -10,7 +10,7 @@ from Final.Splitted.Permutations_Sequences import find_perms, permutations, pair
 def combine_scores_f_perms(points):
     """ Function for aggregating single solutions into one score using hypervolume indicator """
     import pygmo as pg
-    ref_point = np.array([10000, 16000])
+    ref_point = np.array([4000, 6500])
 
     # solutions that not dominate the reference point are excluded
     filtered_points = [s for s in points if pg.pareto_dominance(s, ref_point)]
@@ -49,16 +49,12 @@ def find_best_permutations(p):
                 if p_now[i] == permutations_list[j]:
                     if final_scores[x] < 1000:
                         perm_index[j] += 1
-                    elif final_scores[x] < 10000:
-                        perm_index[j] += 10
-                    elif final_scores[x] < 15000:
-                        perm_index[j] += 15
                     elif final_scores[x] < 20000:
-                        perm_index[j] += 20
+                        perm_index[j] += 3
                     elif final_scores[x] < 30000:
-                        perm_index[j] += 30
+                        perm_index[j] += 5
                     elif final_scores[x] < 300000:
-                        perm_index[j] += 100
+                        perm_index[j] += 10
                     elif final_scores[x] >= 0:
                         perm_index[j] -= 1
 
@@ -66,14 +62,12 @@ def find_best_permutations(p):
     best_sequences = []
     new_permutations = []
     for i in range(len(perm_index)):
-        if perm_index[i] > 0:
+        if perm_index[i] > 50:
             best_sequences.append(list(permutations_list[i]))
             new_permutations.append(list(permutations_list[i]))
 
-    # new_permutations = [[] for i in range(len(best_sequences))]
-
     x = 0
-    #new = []
+
     while x < 5:
         new = []
         for i in range(len(new_permutations)):
@@ -86,11 +80,9 @@ def find_best_permutations(p):
                     if best_sequences[_][1] not in new_permutations[i]:
                         matches.append(best_sequences[_])
                         continue
-            print(matches)
 
             if len(matches) > 0:
                 for m in range(len(matches)):
-                    #new_permutations.append(new_permutations[i]+[matches[m][1]])
                     new.append(new_permutations[i]+[matches[m][1]])
             else:
                 for e in range(7):
@@ -108,6 +100,6 @@ def find_best_permutations(p):
     return new, t_delta, perm_index
 
 
-new, t_delta, perm_index = find_best_permutations(20)
+new, t_delta, perm_index = find_best_permutations(10)
 
 print(new, perm_index)
