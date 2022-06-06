@@ -29,7 +29,10 @@ def proof_dom(t_delta, conts):
         conts.pop(x)
         # print(f"{x} done")
 
-    return conts, t_delta, all_sol_t_delta, all_sol_conts
+    pareto_t_delta = t_delta.copy()
+    pereto_conts = conts.copy()
+
+    return conts, t_delta, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
 
 # alle vor dem ref punkt
 def sort_points(t_delta, conts):
@@ -45,6 +48,7 @@ def sort_points(t_delta, conts):
             t_delta_ref.pop(v)
             conts_ref.pop(v)
             final_scores_ref.pop(v)
+
 
     return t_delta_ref, conts_ref, final_scores_ref
 

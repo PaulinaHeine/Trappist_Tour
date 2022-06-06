@@ -8,7 +8,7 @@ from pymoo.optimize import minimize
 from Final.Splitted.ESA_code import udp
 
 
-def run_NSGA3(perms, offspring=200, pop_size=50, tol=0.002, n_last=8, n_max_gen=200):
+def run_NSGA3(perms, offspring=200, pop_size=200, tol=0.002, n_last=8, n_max_gen=200):
 
     # Set empty parameters
     t_delta = []
@@ -16,7 +16,7 @@ def run_NSGA3(perms, offspring=200, pop_size=50, tol=0.002, n_last=8, n_max_gen=
     conts = []
 
     # create the reference directions to be used for the optimization
-    ref_dirs = get_reference_directions("das-dennis", 2, n_partitions=120, scaling=10.0)
+    ref_dirs = get_reference_directions("das-dennis", 2, n_partitions=100, scaling=10.0)
 
     for n in range(len(perms)):
 

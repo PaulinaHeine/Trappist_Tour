@@ -2,10 +2,14 @@ import time
 
 import numpy as np
 
+from Final.Splitted.Algorithms.AGEMOEA import run_AGEMOEA
+from Final.Splitted.Algorithms.C_TAEA_ import run_CTAEA
+from Final.Splitted.Algorithms.MOEAD_ import run_MOEAD
 from Final.Splitted.Algorithms.NSGA2_ import run_NSGA2
 from Final.Splitted.Algorithms.R_NSGA2_ import run_RNSGA2
 from Final.Splitted.Algorithms.NSGA_3_ import run_NSGA3
 from Final.Splitted.Algorithms.R_NSGA_3_ import run_RNSGA3
+from Final.Splitted.Algorithms.U_NSGA_3_ import run_UNSGA3
 from Final.Splitted.Permutations_Sequences import find_perms, show_sequence
 from Final.Splitted.Sort_and_Filter import proof_dom, best_sol
 from Final.Splitted.ESA_code import combine_scores
@@ -13,14 +17,14 @@ from matplotlib import pyplot as plt
 from Final.Splitted.Plottings import plot_all_points, plot_front, plot_all_points_behind
 
 
-def optimize():
+def optimize(algorithm, p):
     print("Start the run")
     start = time.time()
     print("Select permutations")
-    perms = find_perms(10)
+    perms = find_perms(p)
 
     print("Start the algorithm")
-    t_delta, conts = run_NSGA3(perms, offspring = 200)
+    t_delta, conts = algorithm(perms)
     print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions found")
     print(f"The score is {combine_scores(t_delta)}")
 
@@ -30,7 +34,7 @@ def optimize():
     print(f"The needed time is: {time_interval / 60} minutes")
 
     print("Remove the dominated solutions")
-    conts, t_delta, all_sol_t_delta, all_sol_conts = proof_dom(t_delta, conts)
+    conts, t_delta, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts = proof_dom(t_delta, conts)
     print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions left")
     print(f"The score is {combine_scores(t_delta)}")
 
@@ -46,8 +50,8 @@ def optimize():
             print(f"The needed time is: {time_interval / 60} minutes")
             print(f"The score is {combine_scores(t_delta)}")
 
-            return t_delta, conts, final_scores, all_sol_t_delta, all_sol_conts, all_sol_final_scores
-
+            return t_delta, conts, final_scores, all_sol_t_delta, all_sol_conts, all_sol_final_scores, pareto_t_delta, \
+                   pereto_conts
     else:
         print("No good solutions found")
 
@@ -56,28 +60,33 @@ def optimize():
 
     print(f"The needed time is: {time_interval / 60} minutes")
     print(f"The score is {combine_scores(t_delta)}")
+    print(f"Used: {algorithm}")
 
     # alle Lösungen weil keine Filterung nach guten Werten notwendig war
-    return t_delta, conts, all_sol_t_delta, all_sol_conts
+    return t_delta, conts, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
 
 
-l = optimize()
+l = optimize(run_RNSGA2, 1)
 
-if len(l) == 4:
+if len(l) == 6:
     t_delta = l[0]
     conts = l[1]
     all_sol_t_delta = l[2]
     all_sol_conts = l[3]
-elif len(l) == 6:
+    pareto_t_delta = l[4]
+    pereto_conts = l[5]
+elif len(l) == 8:
     t_delta = l[0]
     conts = l[1]
     final_scores = l[2]
     all_sol_t_delta = l[3]
     all_sol_conts = l[4]
     all_sol_final_scores = l[5]
+    pareto_t_delta = l[6]
+    pareto_conts = l[7]
 
-#plot_all_points(all_sol_t_delta, t_delta)
-#plot_front(t_delta)
-#show_sequence(conts)
+# plot_all_points(all_sol_t_delta, t_delta)
+# plot_front(t_delta)
+# show_sequence(conts)
 
-#plot_all_points_behind(all_sol_t_delta, t_delta, conts)
+# plot_all_points_behind(all_sol_t_delta, t_delta, conts)
