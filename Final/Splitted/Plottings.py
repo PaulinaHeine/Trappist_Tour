@@ -34,7 +34,7 @@ def plot_front(t_delta):
     ref_point_y = 4000
     plt.scatter(ref_point_x, ref_point_y, color="red")
     plt.title("Pareto front")
-    plt.xlim(-5000, 200000)
+    plt.xlim(-5000, 20000)
     plt.ylim(0, 10000)
     plt.xlabel("Delta_V")
     plt.ylabel("Days")

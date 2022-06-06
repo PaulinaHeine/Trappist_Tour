@@ -7,6 +7,7 @@ from Final.Splitted.Algorithms.R_NSGA2_ import run_RNSGA2
 from Final.Splitted.ESA_code import combine_scores
 from Final.Splitted.Permutations_Sequences import find_perms, permutations, pairwise
 
+
 def combine_scores_f_perms(points):
     """ Function for aggregating single solutions into one score using hypervolume indicator """
     import pygmo as pg
@@ -21,16 +22,14 @@ def combine_scores_f_perms(points):
         hv = pg.hypervolume(filtered_points)
         return -hv.compute(ref_point)
 
+
 def find_best_permutations(p):
-    print("Start the run")
-    start = time.time()
-    print("Select permutations")
     perms = find_perms(p)
 
     print("Start the algorithm with low quality but fast")
-    t_delta, conts = run_RNSGA2(perms, offspring=100, pop_size=40,
-                               ref_points=np.array([[0, 0], [3500, 5000], [2500, 4000], [0, 4000], [2500, 0]]),
-                               epsilon=0.01, tol=0.002, n_last=8, n_max_gen=200)
+    t_delta, conts = run_RNSGA2(perms, offspring = 50, pop_size=40,
+                                ref_points=np.array([[0, 0], [3500, 5000], [2500, 4000], [0, 4000], [2500, 0]]),
+                                epsilon=0.01, tol=0.002, n_last=8, n_max_gen=200)
 
     # alle 42 möglichen 2er sequenzen
     permutations_list = list(permutations((0, 1, 2, 3, 4, 5, 6), 2))
@@ -56,7 +55,7 @@ def find_best_permutations(p):
                     elif final_scores[x] < 300000:
                         perm_index[j] += 10
                     elif final_scores[x] >= 0:
-                        perm_index[j] -= 1
+                        perm_index[j] -= 3
 
     # beste rausiltern
     best_sequences = []
@@ -67,7 +66,6 @@ def find_best_permutations(p):
             new_permutations.append(list(permutations_list[i]))
 
     x = 0
-
     while x < 5:
         new = []
         for i in range(len(new_permutations)):
@@ -80,10 +78,9 @@ def find_best_permutations(p):
                     if best_sequences[_][1] not in new_permutations[i]:
                         matches.append(best_sequences[_])
                         continue
-
             if len(matches) > 0:
                 for m in range(len(matches)):
-                    new.append(new_permutations[i]+[matches[m][1]])
+                    new.append(new_permutations[i] + [matches[m][1]])
             else:
                 for e in range(7):
                     if e not in new_permutations[i]:
@@ -92,14 +89,5 @@ def find_best_permutations(p):
 
         new_permutations = new
         x += 1
+    return new
 
-    stop = time.time()
-    time_interval = stop - start
-
-    print(f"The needet time is: {time_interval / 60, round(2)} minutes")
-    return new, t_delta, perm_index
-
-
-new, t_delta, perm_index = find_best_permutations(10)
-
-print(new, perm_index)

@@ -15,6 +15,7 @@ from Final.Splitted.Sort_and_Filter import proof_dom, best_sol
 from Final.Splitted.ESA_code import combine_scores
 from matplotlib import pyplot as plt
 from Final.Splitted.Plottings import plot_all_points, plot_front, plot_all_points_behind
+from Final.Splitted.select_improved_perms import find_best_permutations
 
 
 def optimize(algorithm, p):
@@ -66,7 +67,59 @@ def optimize(algorithm, p):
     return t_delta, conts, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
 
 
-l = optimize(run_RNSGA2, 1)
+def optimize_optimal(algorithm, p):
+    print("Start the run")
+    start = time.time()
+    print("Select permutations")
+    new = find_best_permutations(p)
+    perms = new
+    print(f"{len(perms)}")
+    print(perms)
+
+    print("Start the algorithm")
+    t_delta, conts = algorithm(perms)
+    print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions found")
+    print(f"The score is {combine_scores(t_delta)}")
+
+    stop = time.time()
+    time_interval = stop - start
+
+    print(f"The needed time is: {time_interval / 60} minutes")
+
+    print("Remove the dominated solutions")
+    conts, t_delta, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts = proof_dom(t_delta, conts)
+    print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions left")
+    print(f"The score is {combine_scores(t_delta)}")
+
+    if combine_scores(np.array(t_delta)) < 0.0:
+        print("Score under 0.0 :)")
+        if len(t_delta) > 100:
+            print("Too many solutions, start filtering ")
+            t_delta, final_scores, conts, all_sol_final_scores = best_sol(t_delta, conts)
+
+            stop2 = time.time()
+            time_interval = stop2 - start
+
+            print(f"The needed time is: {time_interval / 60} minutes")
+            print(f"The score is {combine_scores(t_delta)}")
+
+            return t_delta, conts, final_scores, all_sol_t_delta, all_sol_conts, all_sol_final_scores, pareto_t_delta, \
+                   pereto_conts
+    else:
+        print("No good solutions found")
+
+    stop2 = time.time()
+    time_interval = stop2 - start
+
+    print(f"The needed time is: {time_interval / 60} minutes")
+    print(f"The score is {combine_scores(t_delta)}")
+    print(f"Used: {algorithm}")
+
+    # alle Lösungen weil keine Filterung nach guten Werten notwendig war
+    return t_delta, conts, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
+
+
+l = optimize_optimal(run_RNSGA2, 20)
 
 if len(l) == 6:
     t_delta = l[0]
