@@ -11,7 +11,7 @@ from Final.Splitted.Permutations_Sequences import find_perms, permutations, pair
 def combine_scores_f_perms(points):
     """ Function for aggregating single solutions into one score using hypervolume indicator """
     import pygmo as pg
-    ref_point = np.array([4000, 6500])
+    ref_point = np.array([3000, 4000])
 
     # solutions that not dominate the reference point are excluded
     filtered_points = [s for s in points if pg.pareto_dominance(s, ref_point)]
@@ -23,13 +23,11 @@ def combine_scores_f_perms(points):
         return -hv.compute(ref_point)
 
 
-def find_best_permutations(p):
+def find_best_permutations(p, algorithm_p):
     perms = find_perms(p)
 
     print("Start the algorithm with low quality but fast")
-    t_delta, conts = run_RNSGA2(perms, offspring = 50, pop_size=40,
-                                ref_points=np.array([[0, 0], [3500, 5000], [2500, 4000], [0, 4000], [2500, 0]]),
-                                epsilon=0.01, tol=0.002, n_last=8, n_max_gen=200)
+    t_delta, conts = algorithm_p(perms, offspring=50, pop_size=40)
 
     # alle 42 möglichen 2er sequenzen
     permutations_list = list(permutations((0, 1, 2, 3, 4, 5, 6), 2))
@@ -61,7 +59,7 @@ def find_best_permutations(p):
     best_sequences = []
     new_permutations = []
     for i in range(len(perm_index)):
-        if perm_index[i] > 50:
+        if perm_index[i] > 100:
             best_sequences.append(list(permutations_list[i]))
             new_permutations.append(list(permutations_list[i]))
 

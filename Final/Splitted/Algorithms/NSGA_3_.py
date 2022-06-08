@@ -8,7 +8,7 @@ from pymoo.optimize import minimize
 from Final.Splitted.ESA_code import udp
 
 
-def run_NSGA3(perms, offspring=200, pop_size=200, tol=0.002, n_last=8, n_max_gen=200):
+def run_NSGA3(perms, offspring=200, pop_size=50, tol=0.002, n_last=8, n_max_gen=200):
 
     # Set empty parameters
     t_delta = []
@@ -79,7 +79,7 @@ def run_NSGA3(perms, offspring=200, pop_size=200, tol=0.002, n_last=8, n_max_gen
                        termination,
                        seed=42,
                        save_history=True,
-                       verbose=True)
+                       verbose=False)
 
         c = res.X.tolist()
 

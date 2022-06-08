@@ -67,17 +67,17 @@ def optimize(algorithm, p):
     return t_delta, conts, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
 
 
-def optimize_optimal(algorithm, p):
+def optimize_optimal(algorithm, p, algorithm_p):
     print("Start the run")
     start = time.time()
     print("Select permutations")
-    new = find_best_permutations(p)
+    new = find_best_permutations(p, algorithm_p)
     perms = new
     print(f"{len(perms)}")
     print(perms)
 
     print("Start the algorithm")
-    t_delta, conts = algorithm(perms)
+    t_delta, conts = algorithm(perms, offspring = 1000)
     print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions found")
     print(f"The score is {combine_scores(t_delta)}")
 
@@ -119,7 +119,9 @@ def optimize_optimal(algorithm, p):
     return t_delta, conts, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
 
 
-l = optimize_optimal(run_RNSGA2, 20)
+#l = optimize(run_RNSGA3, 1)
+l = optimize_optimal(run_RNSGA2, 20, run_RNSGA2)
+
 
 if len(l) == 6:
     t_delta = l[0]
