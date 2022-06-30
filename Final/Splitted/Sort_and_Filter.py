@@ -34,6 +34,7 @@ def proof_dom(t_delta, conts):
 
     return conts, t_delta, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
 
+
 # alle vor dem ref punkt
 def sort_points(t_delta, conts):
     # alle punkte hinter dem refpunkt raus
@@ -48,7 +49,6 @@ def sort_points(t_delta, conts):
             t_delta_ref.pop(v)
             conts_ref.pop(v)
             final_scores_ref.pop(v)
-
 
     return t_delta_ref, conts_ref, final_scores_ref
 
@@ -68,6 +68,3 @@ def best_sol(t_delta, conts, bound=100):
         conts.pop(index)
         final_scores.pop(index)
     return t_delta, final_scores, conts, all_sol_final_scores
-
-
-

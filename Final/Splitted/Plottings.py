@@ -88,3 +88,25 @@ def plot_front_pareto_all_solutions(all_sol_t_delta, pareto_t_delta):
     plt.plot([2500, 2500], [0, 4000], color='r')
     plt.plot([-100000, 2500], [4000, 4000], color='r')
     plt.show()
+
+
+'''
+plt.style.use('seaborn-whitegrid')
+all_sol_t_delta = np.array(all_sol_t_delta)
+t_delta_ref_2 = np.array(t_delta_ref_2)
+plt.figure(figsize=(7, 5))
+plt.scatter(all_sol_t_delta[:, 0], all_sol_t_delta[:, 1], s=40, facecolors='none', edgecolors='steelblue')
+plt.scatter(t_delta_ref_2[:, 0],t_delta_ref_2[:, 1],s=40, facecolors='purple', alpha=0.5,
+            edgecolors='purple')
+ref_point_x = 2500
+ref_point_y = 4000
+plt.scatter(ref_point_x, ref_point_y, color="red")
+plt.title("All feasible solutions with pareto front")
+plt.xlim(0, 5000)
+plt.ylim(0, 5000)
+plt.xlabel("Delta_V")
+plt.ylabel("Days")
+plt.plot([2500, 2500], [0, 4000], color='r')
+plt.plot([-100000, 2500], [4000, 4000], color='r')
+plt.show()
+'''

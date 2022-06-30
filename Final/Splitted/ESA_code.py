@@ -295,11 +295,11 @@ class trappist_tour:
                 plot_lambert(l, sol=0, color='r', legend=False, units=AU, N=5000, axes=ax)
 
             # some settings for better viewing
-            zoom = 0.25
+            zoom = 0.080
             ax.set_xlim(-zoom, zoom)
             ax.set_ylim(-zoom, zoom)
             ax.set_zlim(-zoom, zoom)
-            ax.margins(x=0)
+            ax.margins(x = 0)
             ax.view_init(elev=90, azim=90)
             ax.grid(False)
             ax.axis(False)
@@ -319,7 +319,7 @@ class trappist_tour:
             # fig = plt.figure()
             # axis = fig.gca(projection='3d')
             # to
-            fig = plt.figure(figsize=(10, 8))
+            fig = plt.figure()
             axis = fig.add_subplot(projection='3d')
 
 

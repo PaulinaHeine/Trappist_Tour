@@ -59,7 +59,7 @@ def find_best_permutations(p, algorithm_p):
     best_sequences = []
     new_permutations = []
     for i in range(len(perm_index)):
-        if perm_index[i] > 100:
+        if perm_index[i] > 150:
             best_sequences.append(list(permutations_list[i]))
             new_permutations.append(list(permutations_list[i]))
 

@@ -77,7 +77,7 @@ def optimize_optimal(algorithm, p, algorithm_p):
     print(perms)
 
     print("Start the algorithm")
-    t_delta, conts = algorithm(perms, offspring = 1000)
+    t_delta, conts = algorithm(perms, offspring = 1300, n_max_gen=400)
     print(f"{len(t_delta), len(conts)} if equal everything is fine. We have {len(conts)} solutions found")
     print(f"The score is {combine_scores(t_delta)}")
 
@@ -119,8 +119,8 @@ def optimize_optimal(algorithm, p, algorithm_p):
     return t_delta, conts, all_sol_t_delta, all_sol_conts, pareto_t_delta, pereto_conts
 
 
-#l = optimize(run_RNSGA3, 1)
-l = optimize_optimal(run_RNSGA2, 20, run_RNSGA2)
+#l = optimize(run_RNSGA2, 70)
+l = optimize_optimal(run_RNSGA2, 30, run_RNSGA2)
 
 
 if len(l) == 6:
