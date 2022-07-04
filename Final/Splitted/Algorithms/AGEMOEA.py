@@ -1,19 +1,22 @@
+from pymoo.algorithms.moo.age import AGEMOEA
+from pymoo.factory import get_reference_directions
 import numpy as np
-from pymoo.algorithms.moo.rnsga2 import RNSGA2
+from pymoo.factory import get_sampling, get_crossover, get_mutation, get_selection
 from pymoo.core.problem import ElementwiseProblem
-from pymoo.optimize import minimize
 from pymoo.util.termination.f_tol import MultiObjectiveSpaceToleranceTermination
-
+from pymoo.optimize import minimize
 from Final.Splitted.ESA_code import udp
 
 
-def run_RNSGA2(perms, offspring=200, pop_size=50,
-               ref_points=np.array([[0, 0], [3500, 5000], [2500, 4000], [0, 4000], [2500, 0]]),
-               epsilon=0.001, tol=0.002, n_last=8, n_max_gen=200):
+def run_AGEMOEA(perms, offspring=200, pop_size=50, tol=0.002, n_last=8, n_max_gen=200):
+
     # Set empty parameters
     t_delta = []
 
     conts = []
+
+    # create the reference directions to be used for the optimization
+    ref_dirs = get_reference_directions("das-dennis", 2, n_partitions=100, scaling=10.0)
 
     for n in range(len(perms)):
 
@@ -34,7 +37,7 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
                 if len(res) == 4:
                     dv, T, eq, ineq = udp.fitness(x)
 
-                elif len(res) == 6:
+                elif len(res) == 5:
                     dv_init, DV, T, lamberts, eq, ineq = udp.fitness(x)
                     dv = dv_init + sum(DV)
 
@@ -43,7 +46,7 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
                         dv, T, eq, ineq = udp.fitness(x)
                         dv += 99999999999
                         T += 999999999999999
-                    elif len(res) == 6:
+                    elif len(res) == 5:
                         dv_init, DV, T, lamberts, eq, ineq = udp.fitness(x)
                         dv = dv_init + sum(DV)
                         dv += 99999999999
@@ -54,20 +57,22 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
 
         problem = MyProblem()
 
-        algorithm = RNSGA2(
-            ref_points=ref_points,
-            n_offsprings=offspring,
-            pop_size=pop_size,
-            epsilon=epsilon,
-            normalization='front',
-            extreme_points_as_reference_points=False,
-            seed=42)
+        algorithm = AGEMOEA(
+            pop_size= pop_size ,
+            n_offsprings= offspring,
+            sampling=get_sampling("real_lhs"),
+            selection=get_selection('random'),
+            crossover=get_crossover("real_sbx", prob=5, eta=15),
+            mutation=get_mutation("real_pm", eta=100),
+            eliminate_duplicates=True,
+            seed=42
+        )
 
-        termination = MultiObjectiveSpaceToleranceTermination(tol=tol,
-                                                              n_last=n_last,
-                                                              n_max_gen=n_max_gen,
+        # termination = get_termination("n_gen", 20)
+        termination = MultiObjectiveSpaceToleranceTermination(tol= tol,
+                                                              n_last= n_last,
+                                                              n_max_gen= n_max_gen,
                                                               n_max_evals=None)
-
         res = minimize(problem,
                        algorithm,
                        termination,
@@ -87,6 +92,7 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
 
         print(f"The {n + 1}'th Permutation is done")
         print(f"{len(perms) - (n + 1)} to do ")
-    perms = []
 
-    return t_delta, conts,
+    return t_delta, conts
+
+
