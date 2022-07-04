@@ -28,10 +28,16 @@ def permutations(iterable, r=None):
             return
 
 
-def find_perms(r):
-    perms = (list(itertools.permutations([0, 1, 2, 3, 4, 5, 6])))
-    #perms = perms[0:r]
-    perms = random.sample(perms, r)
+
+def find_perms(r=None):
+
+    #print("Random sample:")
+    if r is None:
+        r = 10
+    ps = list(itertools.permutations([0, 1, 2, 3, 4, 5, 6]))
+    perms = random.sample(ps, r)
+    #perms = ps[800:r]
+    print(perms)
     return perms
 
 

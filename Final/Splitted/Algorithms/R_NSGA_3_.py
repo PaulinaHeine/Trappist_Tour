@@ -1,5 +1,5 @@
 import numpy as np
-from pymoo.algorithms.moo.rnsga2 import RNSGA2
+from pymoo.algorithms.moo.rnsga3 import RNSGA3
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.optimize import minimize
 from pymoo.util.termination.f_tol import MultiObjectiveSpaceToleranceTermination
@@ -7,9 +7,11 @@ from pymoo.util.termination.f_tol import MultiObjectiveSpaceToleranceTermination
 from Final.Splitted.ESA_code import udp
 
 
-def run_RNSGA2(perms, offspring=200, pop_size=50,
+##################Value error array beim minimieren ist leer###########################
+
+def run_RNSGA3(perms, offspring=2000,  pop_per_ref_point=50,
                ref_points=np.array([[0, 0], [3500, 5000], [2500, 4000], [0, 4000], [2500, 0]]),
-               epsilon=0.001, tol=0.002, n_last=8, n_max_gen=200):
+               tol=0.002, n_last=2, n_max_gen=200):
     # Set empty parameters
     t_delta = []
 
@@ -54,14 +56,12 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
 
         problem = MyProblem()
 
-        algorithm = RNSGA2(
+        algorithm = RNSGA3(
             ref_points=ref_points,
             n_offsprings=offspring,
-            pop_size=pop_size,
-            epsilon=epsilon,
-            normalization='front',
-            extreme_points_as_reference_points=False,
-            seed=42)
+            pop_per_ref_point= pop_per_ref_point,
+            seed=42,
+            mu=0.1)
 
         termination = MultiObjectiveSpaceToleranceTermination(tol=tol,
                                                               n_last=n_last,
@@ -73,7 +73,7 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
                        termination,
                        seed=42,
                        save_history=True,
-                       verbose=False)
+                       verbose=True)
 
         c = res.X.tolist()
 
@@ -87,6 +87,7 @@ def run_RNSGA2(perms, offspring=200, pop_size=50,
 
         print(f"The {n + 1}'th Permutation is done")
         print(f"{len(perms) - (n + 1)} to do ")
-    perms = []
 
-    return t_delta, conts,
+    return t_delta, conts
+
+

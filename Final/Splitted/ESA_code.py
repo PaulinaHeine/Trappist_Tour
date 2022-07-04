@@ -344,7 +344,7 @@ class trappist_tour:
 def combine_scores(points):
     """ Function for aggregating single solutions into one score using hypervolume indicator """
     import pygmo as pg
-    ref_point = np.array([2500, 4000])
+    ref_point = np.array([500, 8000])
 
     # solutions that not dominate the reference point are excluded
     filtered_points = [s for s in points if pg.pareto_dominance(s, ref_point)]
