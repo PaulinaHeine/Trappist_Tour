@@ -1,3 +1,10 @@
+
+'''
+This code builds new (improved) permutations by scoring random permutations.
+'''
+
+
+
 import time
 
 import numpy as np
