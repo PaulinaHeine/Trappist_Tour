@@ -1,20 +1,22 @@
-# Trappist_Tour
+#######
+Multi objective optimization challenge
+#######
 
+Problem:
 
+TRAPPIST-1 system needs to be explored. This should be done wihth the least amount of delta V and time.
+The trajectory is determined by a 34 dimensional Vector.
+	- 27 astrophysical parameters (floats)
+	- 7  integers that determies the sequence of visiting the planets
 
-To Do:
+The goal is to find the set of solutions that forms the best possible pareto front.
+#####################################################################################
+Solution approach:
 
-	- Präsentation
-	- Notizen zu einzelnen teilen
-	-  Trappist Einleitung schreiben
-	- co occurence
-	- R-NSGA3 probieren
-		- ggf auch andere Algorithmen 
-	- Code auf anderes Laptop übertragen um alle 	perms durchlaufen 	  zu lassen
-	- Nachricht verstehen
-	- Funktion schreiben um zu prüfen ob bounds eingehalten
-	- mal ne Lösung hochladen
-	- Permutation sampeling Finishen
-	- Permutationssequenzen aneinanderhängen, random? Per 	   system??? Wie???
-	- Plots am ende schön machen 2.6.
+Decomposing the vector into two partial problems:
+ 1.: Find the optimal sequential order of visiting the exoplanets, determined by the seven categorical integer variables.
+ 2.: Determine the optimal values for the continuous astronomical parameters in order to minimize both objectives.
+
+Solving p1:
+	Selecting X random permutations and optimize the 27 other values with py
 	
