@@ -10,7 +10,8 @@ The trajectory is determined by a 34 dimensional Vector.
 	- 7  integers that determies the sequence of visiting the planets
 
 The goal is to find the set of solutions that forms the best possible pareto front.
-#################Solution approach:######################
+
+#######Solution approach:###########
 
 Decomposing the vector into two partial problems:
  1.: Find the optimal sequential order of visiting the exoplanets, determined by the seven categorical integer variables.
