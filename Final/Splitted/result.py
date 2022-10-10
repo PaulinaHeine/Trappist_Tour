@@ -1,4 +1,4 @@
-#dec vec um den score zu erreichen
+#This is the vector that contains the best solutions
 
 conts = [[0.7560099371225215,
           0.49490457238217095,
