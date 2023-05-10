@@ -4,8 +4,11 @@ from matplotlib import pyplot as plt
 from Final.Splitted.Sort_and_Filter import sort_points
 
 
-# alle feasibles und die 100 besten der pareto front
+
 def plot_all_points(all_sol_t_delta, t_delta):
+    '''
+    all feasible points and best 100 of pareto front
+    '''
     plt.style.use('seaborn-whitegrid')
     all_sol_t_delta = np.array(all_sol_t_delta)
     t_delta = np.array(t_delta)
@@ -25,8 +28,11 @@ def plot_all_points(all_sol_t_delta, t_delta):
     plt.show()
 
 
-# nur die front wird geplotted, nur die besten 100
+
 def plot_front(t_delta):
+    '''
+    Plot only the best 100 of front
+    '''
     plt.style.use('seaborn-whitegrid')
     t_delta = np.array(t_delta)
     plt.figure(figsize=(7, 5))
@@ -44,8 +50,11 @@ def plot_front(t_delta):
     plt.show()
 
 
-# mit den lilaenen
+
 def plot_all_points_behind(all_sol_t_delta, t_delta, conts):
+    '''
+    All points that give a score (are better then reference point)
+    '''
     plt.style.use('seaborn-whitegrid')
     all_sol_t_delta = np.array(all_sol_t_delta)
     t_delta = np.array(t_delta)
@@ -68,8 +77,11 @@ def plot_all_points_behind(all_sol_t_delta, t_delta, conts):
     plt.show()
 
 
-# nicht nur die hundert besten werden geplottet sondern alle aus der paretofront
+
 def plot_front_pareto_all_solutions(all_sol_t_delta, pareto_t_delta):
+    '''
+    nicht nur die hundert besten werden geplottet sondern alle aus der paretofront
+    '''
     plt.style.use('seaborn-whitegrid')
     all_sol_t_delta = np.array(all_sol_t_delta)
     pareto_t_delta = np.array(pareto_t_delta)
