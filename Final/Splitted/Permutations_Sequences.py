@@ -1,3 +1,8 @@
+
+'''
+Funktions for permutations and improving permutations
+''' 
+
 import random
 import itertools
 
