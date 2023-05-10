@@ -70,6 +70,9 @@ def optimize(algorithm, p):
 
 
 def optimize_optimal(algorithm, p, algorithm_p):
+    '''
+    Select improved permuattaions and optimize them. This code connects everything
+    '''
     print("Start the run")
     start = time.time()
     print("Select permutations")
