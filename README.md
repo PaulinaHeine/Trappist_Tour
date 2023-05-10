@@ -1,7 +1,7 @@
 #
 Multi objective optimization challenge
-#
 Topic of my thesis, Graded with 1.3 and awarded by GOR
+#
 
 Problem:
 
