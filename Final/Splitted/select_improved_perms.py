@@ -31,6 +31,11 @@ def combine_scores_f_perms(points):
 
 
 def find_best_permutations(p, algorithm_p):
+    '''
+    Builds new improved permutations. Select a sequence of 2 with a good score, 
+    find another good sequence of two that starts with the second planet of the first sequence of two to
+    ensure that transition scores well too.
+    '''
     perms = find_perms(r=p)
 
     print("Start the algorithm with low quality but fast")
@@ -71,6 +76,7 @@ def find_best_permutations(p, algorithm_p):
             new_permutations.append(list(permutations_list[i]))
 
     x = 0
+    #<5 to find a sequence of seven
     while x < 5:
         new = []
         for i in range(len(new_permutations)):
