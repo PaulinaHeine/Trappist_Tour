@@ -3,7 +3,7 @@ Multi objective optimization challenge
 #
 Topic of my thesis, Graded with 1.3 and awarded by GOR
 
-##########Problem:##########
+Problem:
 
 TRAPPIST-1 system needs to be explored. This should be done wihth the least amount of delta V and time.
 The trajectory is determined by a 34 dimensional Vector.
@@ -12,7 +12,7 @@ The trajectory is determined by a 34 dimensional Vector.
 
 The goal is to find the set of solutions that forms the best possible pareto front.
 
-#######Solution approach:###########
+Solution approach:
 
 Decomposing the vector into two partial problems:
  1.: Find the optimal sequential order of visiting the exoplanets, determined by the seven categorical integer variables.
@@ -28,7 +28,7 @@ Solving p1:
 Solving p2:
 	Optimize the formed permutations with pymoo. Using different algotithms. Than searching for the best pareto front.
 	
-########Result########
+Result:
 
 This approach results in a score of -3 440 253.65
 
